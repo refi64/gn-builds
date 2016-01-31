@@ -1,0 +1,30 @@
+<dom-module id="binary-link">
+  <template>
+    <style>
+    a { text-decoration: none; color: blue; }
+    a:visited { text-decoration: none; color: blue; }
+    </style>
+
+    <iron-ajax auto
+      url="https://api.github.com/repos/kirbyfan64/chromium-buildtools/contents/{{platform}}/gn{{suffix}}.sha1"
+      handle-as="text" last-response="{{hash}}"
+      headers='{"Accept": "application/vnd.github.v3.raw+json"}'></iron-ajax>
+    <p>{{platform}}:
+      <a download="gn{{suffix}}"
+         href="https://storage.googleapis.com/chromium-gn/{{hash}}">
+        {{hash}}
+      </a>
+    </p>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'binary-link',
+
+      properties: {
+        platform: String,
+        suffix: { type: String, value: '' }
+      },
+    })
+  </script>
+</dom-module>

@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Unofficial GN Download Page</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="bower_components/iron-ajax/iron-ajax.html"/>
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html"/>
+
+    <style is="custom-style">
+    paper-toolbar {
+      --paper-toolbar-background: green;
+      --paper-toolbar-color: white;
+    }
+    </style>
+
+    <link rel="import" href="binary-link.html"/>
+  </head>
+
+  <body>
+    <paper-toolbar>
+      <div class="title">GN Downloads</div>
+    </paper-toolbar>
+
+    <br/>
+
+    <h4>Binary downloads:</h4>
+
+    <binary-link platform="linux64"></binary-link>
+    <binary-link platform="mac"></binary-link>
+    <binary-link platform="win" suffix=".exe"></binary-link>
+
+  </body>
+</html>

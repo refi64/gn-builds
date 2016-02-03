@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
-    "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0"
+    "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0",
+    "paper-button": "PolymerElements/paper-button#^1.0.0"
   }
 }

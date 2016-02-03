@@ -6,12 +6,16 @@
     </script>
     <link rel="import" href="bower_components/iron-ajax/iron-ajax.html"/>
     <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html"/>
+    <link rel="import" href="bower_components/paper-button/paper-button.html"/>
 
     <style is="custom-style">
     paper-toolbar {
       --paper-toolbar-background: green;
+
       --paper-toolbar-color: white;
     }
+
+    a paper-button, a:active paper-button, a:visited paper-button { color: white; }
     </style>
 
     <link rel="import" href="binary-link.html"/>
@@ -19,7 +23,10 @@
 
   <body>
     <paper-toolbar>
-      <div class="title">GN Builds</div>
+      <span class="title">GN Builds</span>
+      <a href="https://github.com/kirbyfan64/gn-builds">
+        <paper-button>Source</paper-button>
+      </a>
     </paper-toolbar>
 
     <br/>

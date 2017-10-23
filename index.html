@@ -1,48 +1,75 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>gn-builds: Unofficial GN Download Page</title>
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
-    </script>
-    <link rel="import" href="bower_components/iron-ajax/iron-ajax.html"/>
-    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html"/>
-    <link rel="import" href="bower_components/paper-button/paper-button.html"/>
+    <title>Unofficial GN Download Page</title>
 
-    <style is="custom-style">
-    paper-toolbar {
-      --paper-toolbar-background: green;
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <script src="https://unpkg.com/display.js"></script>
 
-      --paper-toolbar-color: white;
-    }
+    <style>
+      body {
+        text-align: center;
+        position: relative;
+      }
 
-    a paper-button, a:active paper-button, a:visited paper-button { color: white; }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
+      a { text-decoration: none !important; }
     </style>
-
-    <link rel="import" href="binary-link.html"/>
   </head>
 
   <body>
-    <paper-toolbar>
-      <span class="title">GN Builds</span>
-      <a href="https://github.com/kirbyfan64/gn-builds">
-        <paper-button>Source</paper-button>
-      </a>
-    </paper-toolbar>
+    <h2>Unofficial GN Download Page</h2>
 
-    <br/>
+    <p>
+      Unofficial GN binary downloads based on the <code>chromium-buildtools</code>
+      repository.
+      <br>
+      If you're using a Ubuntu variant, you can also use
+        <a href="https://refi64.com/pages/apt.html">my APT repository</a>.
+      <br>Both of these are updated roughly once a week.</p>
 
     <h4>Binary downloads:</h4>
 
-    <binary-link platform="linux64"></binary-link>
-    <binary-link platform="mac"></binary-link>
-    <binary-link platform="win" suffix=".exe"></binary-link>
+    <div id="items">
+      <div id="linux64">Loading...</div>
+      <div id="mac">Loading...</div>
+      <div id="win">Loading...</div>
+    </div>
 
-    <h4>About</h4>
+    <div class="footer">
+      <a class="button button-primary" href="https://github.com/kirbyfan64/gn-builds">SOURCE CODE</a>
+    </div>
 
-    <p>
-      This is just a page I wrote to always publish the LATEST version of the GN
-      binaries.
-    </p>
+    <script defer>
+      var BASE = 'https://raw.githubusercontent.com/kirbyfan64/chromium-buildtools/master/';
+      var STORAGE = 'https://storage.googleapis.com/chromium-gn/';
+      var $ = new DisplayJS();
 
+      function getBinary(platform) {
+        var suffix = platform == 'win' ? '.exe' : '';
+
+        $.ajax(BASE+platform+'/gn'+suffix+'.sha1', 'GET', '', function (resp) {
+          var el = $.select('#'+platform);
+
+          $.empty(el);
+          $.append(el, '<b>' + platform + ': </b>');
+          $.append(el, '<a href="' + STORAGE + resp + '">' + resp + '</a>');
+        });
+      }
+
+      $.ready(function () {
+        var platforms = ['linux64', 'mac', 'win'];
+
+        for (var i=0; i<platforms.length; i++) {
+          getBinary(platforms[i]);
+        }
+      });
+    </script>
   </body>
 </html>
